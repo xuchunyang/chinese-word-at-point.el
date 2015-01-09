@@ -1,5 +1,5 @@
 ** About
-This package provides two additional =chinese-word= and
+=chinese-word-at-point= provides two additional =chinese-word= and
 =chinese-or-other-word= things for =thing-at-point= function.
 
 ** Prerequisite
@@ -14,10 +14,15 @@ To install, follow the usual steps:
 - Issue ~(require 'chinese-word-at-point)~
 
 ** Usage
+This library is designed to be used by other library writers, to write apps that
+needs to deal with Chinese, and is not useful by itself.
+
+Below are functions you can use:
 - Use ~(thing-at-point 'chinese-word)~ to get Chinese word at point
 - Use ~(thing-at-point 'chinese-or-other-word)~ to get any possible word
   (including Chinese) at point
 - use ~(chinese-word-cjk-string-p a-string)~ to test whether a string consists
   of pure CJK characters.
 
-You can also use ~(chinese-word-at-point)~ and ~(chinese-or-other-word-at-point)~ if you prefer.
+You can also use ~(chinese-word-at-point)~ and
+~(chinese-or-other-word-at-point)~ if you prefer.
