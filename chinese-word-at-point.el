@@ -1,4 +1,4 @@
-;;; chinese-word-at-point.el --- Add `chinese-word' to `thing-at-point' function  -*- coding: utf-8; -*-
+;;; chinese-word-at-point.el --- Add `chinese-word' and `chinese-or-other-word' to `thing-at-point' function
 
 ;; Copyright © 2015 Chunyang Xu
 
@@ -24,13 +24,15 @@
 
 ;;; Commentary:
 
-;; This file provides an additional `chinese-word' thing for `thing-at-point'
-;; function.
+;; This file provides an additional `chinese-word' and `chinese-or-other-word'
+;; thing to `thing-at-point' function.
 
 ;; Using:
 ;;
-;; 1. Add (require 'chinese-word-at-point) to your elisp code.
-;; 2. Use (thing-at-point 'chinese-word).
+;; Use (thing-at-point 'chinese-word) to get only Chinese word at point
+;; Use (thing-at-point 'chinese-or-other-word) to get any possible word (including Chinese) at point
+;;
+;; You can also use (chinese-word-at-point) and (chinese-or-other-word-at-point) if you prefer.
 
 ;;; Code:
 
@@ -73,7 +75,7 @@ see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for
   "Return the bounds of the (most likely) Chinese word at point."
   (save-excursion
     ;; FIXME: only Chinese (not CJK) string should be split,
-    ;; but I do not know the exactly range of Chinese
+    ;; but I do not know the exactly range of Chinese characters.
     (when (chinese-word--cjk-string-p (thing-at-point 'word t))
       (let* ((boundary (bounds-of-thing-at-point 'word))
              (beginning-pos (car boundary))
@@ -93,10 +95,37 @@ see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for
 
 (put 'chinese-word 'bounds-of-thing-at-point 'chinese-word-at-point-bounds)
 
+(defun chinese-or-other-word-at-point-bounds ()
+  "Return the bounds of the Chinese or other language word at point.
+
+Here's \"other\" means any language words that Emacs can understand,
+i.e. (thing-at-point 'word) can get proper word."
+  (save-excursion
+    ;; FIXME: only Chinese (not CJK) string should be split,
+    ;; but I do not know the exactly range of Chinese characters.
+    (if (chinese-word--cjk-string-p (thing-at-point 'word t))
+        (chinese-word-at-point-bounds)
+      (bounds-of-thing-at-point 'word))))
+
+(put 'chinese-or-other-word 'bounds-of-thing-at-point 'chinese-or-other-word-at-point-bounds)
+
 ;;;###autoload
 (defun chinese-word-at-point ()
   "Return the (most likely) Chinese word at point, or nil if none is found."
   (thing-at-point 'chinese-word))
 
-(provide 'date-at-point)
+;;;###autoload
+(defun chinese-or-other-word-at-point ()
+  "Return the Chinese or other language word at point, or nil if none is found.
+
+Here's \"other\" denotes any language words that Emacs can understand,
+i.e. (thing-at-point 'word) can get proper word."
+  (thing-at-point 'chinese-or-other-word))
+
+;; Local Variables:
+;; coding: utf-8
+;; End:
+
+(provide 'chinese-word-at-point)
+
 ;;; chinese-word-at-point.el ends here
