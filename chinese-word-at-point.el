@@ -40,6 +40,7 @@
 (defvar chinese-word-split-command
   "echo %s | python -m jieba -q -d ' '"
   "Set command for Chinese text segmentation.
+
 The result should separated by one space.
 
 I know two Chinese word segmentation tools, which have command line
@@ -52,11 +53,28 @@ Return Chinese words as a string separated by one space"
   (shell-command-to-string
    (format chinese-word-split-command chinese-string)))
 
+(defun chinese-word--cjk-characters-p (char)
+  "Return t if CHAR is a CJK character.
+
+For CJK characters range in Unicode,
+see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for-chinese-characters-in-unicode/'"
+  (or (<= #x4E00 char #x9FCC)
+      (<= #x3400 char #x4DB5)
+      (<= #x20000 char #x2A6D6)
+      (<= #x2A700 char #x2B734)
+      (<= #x2B740 char #x2B81D)))
+
+(defun chinese-word--cjk-string-p (string)
+  "Return t if STRING is a CJK string."
+  (not (cl-remove-if 'chinese-word--cjk-characters-p
+                     (string-to-list string))))
+
 (defun chinese-word-at-point-bounds ()
   "Return the bounds of the (most likely) Chinese word at point."
   (save-excursion
-    ;; FIXME: only Chinese string should be split
-    (when (thing-at-point 'word)
+    ;; FIXME: only Chinese (not CJK) string should be split,
+    ;; but I do not know the exactly range of Chinese
+    (when (chinese-word--cjk-string-p (thing-at-point 'word t))
       (let* ((boundary (bounds-of-thing-at-point 'word))
              (beginning-pos (car boundary))
              (end-pos (cdr boundary))
