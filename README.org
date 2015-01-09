@@ -1,5 +1,5 @@
 ** About
-This micro-package provides two additional =chinese-word= and
+This package provides two additional =chinese-word= and
 =chinese-or-other-word= things for =thing-at-point= function.
 
 ** Prerequisite
@@ -14,7 +14,7 @@ To install, follow the usual steps:
 - Issue ~(require 'chinese-word-at-point)~
 
 ** Usage
-- Use ~(thing-at-point 'chinese-word)~ to get only Chinese word at point
+- Use ~(thing-at-point 'chinese-word)~ to get Chinese word at point
 - Use ~(thing-at-point 'chinese-or-other-word)~ to get any possible word
   (including Chinese) at point
 - use ~(chinese-word-cjk-string-p a-string)~ to test whether a string consists

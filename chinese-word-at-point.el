@@ -1,4 +1,4 @@
-;;; chinese-word-at-point.el --- Add `chinese-word' and `chinese-or-other-word' things to `thing-at-point' function
+;;; chinese-word-at-point.el --- Add `chinese-word' thing to `thing-at-point'
 
 ;; Copyright © 2015 Chunyang Xu
 
@@ -24,8 +24,8 @@
 
 ;;; Commentary:
 
-;; This file provides an additional `chinese-word' and `chinese-or-other-word'
-;; thing to `thing-at-point' function.
+;; This file provides two additional `chinese-word' and `chinese-or-other-word'
+;; things to `thing-at-point' function.
 
 ;; Using:
 ;;
@@ -33,7 +33,8 @@
 ;; 2. Use (thing-at-point 'chinese-or-other-word) to get any possible word
 ;; (including Chinese) at point
 ;;
-;; You can also use (chinese-word-at-point) and (chinese-or-other-word-at-point) if you prefer.
+;; You can also use (chinese-word-at-point) and (chinese-or-other-word-at-point)
+;; if you prefer.
 ;;
 ;; 3. use (chinese-word-cjk-string-p string) to test whether a string consists
 ;; of pure CJK characters.
@@ -111,7 +112,8 @@ i.e. (thing-at-point 'word) can get proper word."
         (chinese-word-at-point-bounds)
       (bounds-of-thing-at-point 'word))))
 
-(put 'chinese-or-other-word 'bounds-of-thing-at-point 'chinese-or-other-word-at-point-bounds)
+(put 'chinese-or-other-word 'bounds-of-thing-at-point
+'chinese-or-other-word-at-point-bounds)
 
 ;;;###autoload
 (defun chinese-word-at-point ()
