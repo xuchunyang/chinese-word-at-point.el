@@ -1,0 +1,20 @@
+** About
+This micro-package provides an additional =chinese-word= thing for =thing-at-point=
+function.
+
+** Prerequisite
+A Chinese word segmentation tool which has command line interface is required,
+you can [[https://github.com/fxsjy/jieba][jieba (结巴中文分词)]] or [[https://github.com/hightman/scws][SCWS (简易中文分词系统)]], the former used by
+default, if you use the latter, you have to set ~chinese-word-split-command~.
+
+** Installation
+To install, follow the usual steps:
+- Clone this repository
+- Add this directory to your ~load-path~
+- Issue ~(require 'chinese-word-at-point)~
+
+Now you can use =(thing-at-point 'chinese-word)= or =(chinese-word-at-point)= in your
+elisp code.
+
+** TODOs
+- [ ] Add ~chinese-or-other-word~ thing for ~thing-at-point~
