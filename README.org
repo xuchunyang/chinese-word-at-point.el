@@ -1,6 +1,6 @@
 ** About
-This micro-package provides an additional =chinese-word= and
-=chinese-or-other-word= thing for =thing-at-point= function.
+This micro-package provides two additional =chinese-word= and
+=chinese-or-other-word= things for =thing-at-point= function.
 
 ** Prerequisite
 A Chinese word segmentation tool which has command line interface is required,

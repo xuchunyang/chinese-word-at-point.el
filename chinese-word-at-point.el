@@ -1,4 +1,4 @@
-;;; chinese-word-at-point.el --- Add `chinese-word' and `chinese-or-other-word' to `thing-at-point' function
+;;; chinese-word-at-point.el --- Add `chinese-word' and `chinese-or-other-word' things to `thing-at-point' function
 
 ;; Copyright © 2015 Chunyang Xu
 
