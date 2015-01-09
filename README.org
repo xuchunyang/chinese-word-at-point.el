@@ -17,5 +17,7 @@ To install, follow the usual steps:
 - Use ~(thing-at-point 'chinese-word)~ to get only Chinese word at point
 - Use ~(thing-at-point 'chinese-or-other-word)~ to get any possible word
   (including Chinese) at point
+- use ~(chinese-word-cjk-string-p a-string)~ to test whether a string consists
+  of pure CJK characters.
 
 You can also use ~(chinese-word-at-point)~ and ~(chinese-or-other-word-at-point)~ if you prefer.

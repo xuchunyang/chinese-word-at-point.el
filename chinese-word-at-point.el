@@ -29,10 +29,14 @@
 
 ;; Using:
 ;;
-;; Use (thing-at-point 'chinese-word) to get only Chinese word at point
-;; Use (thing-at-point 'chinese-or-other-word) to get any possible word (including Chinese) at point
+;; 1. Use (thing-at-point 'chinese-word) to get Chinese word at point
+;; 2. Use (thing-at-point 'chinese-or-other-word) to get any possible word
+;; (including Chinese) at point
 ;;
 ;; You can also use (chinese-word-at-point) and (chinese-or-other-word-at-point) if you prefer.
+;;
+;; 3. use (chinese-word-cjk-string-p string) to test whether a string consists
+;; of pure CJK characters.
 
 ;;; Code:
 
@@ -66,7 +70,7 @@ see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for
       (<= #x2A700 char #x2B734)
       (<= #x2B740 char #x2B81D)))
 
-(defun chinese-word--cjk-string-p (string)
+(defun chinese-word-cjk-string-p (string)
   "Return t if STRING is a CJK string."
   (not (cl-remove-if 'chinese-word--cjk-characters-p
                      (string-to-list string))))
@@ -76,7 +80,7 @@ see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for
   (save-excursion
     ;; FIXME: only Chinese (not CJK) string should be split,
     ;; but I do not know the exactly range of Chinese characters.
-    (when (chinese-word--cjk-string-p (thing-at-point 'word t))
+    (when (chinese-word-cjk-string-p (thing-at-point 'word t))
       (let* ((boundary (bounds-of-thing-at-point 'word))
              (beginning-pos (car boundary))
              (end-pos (cdr boundary))
@@ -103,7 +107,7 @@ i.e. (thing-at-point 'word) can get proper word."
   (save-excursion
     ;; FIXME: only Chinese (not CJK) string should be split,
     ;; but I do not know the exactly range of Chinese characters.
-    (if (chinese-word--cjk-string-p (thing-at-point 'word t))
+    (if (chinese-word-cjk-string-p (thing-at-point 'word t))
         (chinese-word-at-point-bounds)
       (bounds-of-thing-at-point 'word))))
 
