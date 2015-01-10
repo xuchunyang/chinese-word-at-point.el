@@ -1,3 +1,5 @@
+[[http://melpa.org/#/chinese-word-at-point][file:http://melpa.org/packages/chinese-word-at-point-badge.svg]]
+
 ** About
 =chinese-word-at-point= provides two additional =chinese-word= and
 =chinese-or-other-word= things for =thing-at-point= function.
@@ -8,10 +10,7 @@ you can use [[https://github.com/fxsjy/jieba][jieba (结巴中文分词)]] or [[
 default, if you use the latter, you have to set ~chinese-word-split-command~.
 
 ** Installation
-To install, follow the usual steps:
-- Clone this repository
-- Add this directory to your =load-path=
-- Issue ~(require 'chinese-word-at-point)~
+=chinese-word-at-point= is available on Melpa.
 
 ** Usage
 This library is designed to be used by other library writers, to write apps that
