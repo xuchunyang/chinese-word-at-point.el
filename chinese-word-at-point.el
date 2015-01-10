@@ -65,11 +65,11 @@ Return Chinese words as a string separated by one space"
 
 For CJK characters range in Unicode,
 see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for-chinese-characters-in-unicode/'"
-  (or (<= #x4E00 char #x9FCC)
-      (<= #x3400 char #x4DB5)
-      (<= #x20000 char #x2A6D6)
-      (<= #x2A700 char #x2B734)
-      (<= #x2B740 char #x2B81D)))
+  (or (and (>= char #x4E00) (<= char #x9FCC))
+      (and (>= char #x3400) (<= char #x4DB5))
+      (and (>= char #x20000) (<= char #x2A6D6))
+      (and (>= char #x2A700) (<= char #x2B734))
+      (and (>= char #x2B740) (<= char #x2B81D))))
 
 (defun chinese-word-cjk-string-p (string)
   "Return t if STRING is a CJK string."
