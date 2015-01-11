@@ -1,21 +1,22 @@
+* chinese-word-at-point.el
+[[http://stable.melpa.org/#/chinese-word-at-point][file:http://stable.melpa.org/packages/chinese-word-at-point-badge.svg]]
 [[http://melpa.org/#/chinese-word-at-point][file:http://melpa.org/packages/chinese-word-at-point-badge.svg]]
 
-** About
+* About
 =chinese-word-at-point= provides two additional =chinese-word= and
-=chinese-or-other-word= things for =thing-at-point= function.
+=chinese-or-other-word= things for =thing-at-point= function. This library is
+designed to be used by other library writers, to write apps that needs to deal
+with Chinese, and is not useful by itself.
 
-** Prerequisite
+* Prerequisite
 A Chinese word segmentation tool which has command line interface is required,
 you can use [[https://github.com/fxsjy/jieba][jieba (结巴中文分词)]] or [[https://github.com/hightman/scws][SCWS (简易中文分词系统)]], the former used by
 default, if you use the latter, you have to set ~chinese-word-split-command~.
 
-** Installation
+* Installation
 =chinese-word-at-point= is available on Melpa.
 
-** Usage
-This library is designed to be used by other library writers, to write apps that
-needs to deal with Chinese, and is not useful by itself.
-
+* Usage
 Below are functions you can use:
 - Use ~(thing-at-point 'chinese-word)~ to get Chinese word at point
 - Use ~(thing-at-point 'chinese-or-other-word)~ to get any possible word
