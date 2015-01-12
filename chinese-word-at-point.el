@@ -5,7 +5,7 @@
 ;; Author: Chunyang Xu <xuchunyang56@gmail.com>
 ;; URL: https://github.com/xuchunyang/chinese-word-at-point.el
 ;; Package-Requires: ((cl-lib "0.5"))
-;; Version: 0.1
+;; Version: 0.2
 ;; Created: 9 Jan 2015
 ;; Keywords: convenience, Chinese
 
