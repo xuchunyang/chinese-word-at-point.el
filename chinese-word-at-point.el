@@ -81,22 +81,23 @@ see URL `http://stackoverflow.com/questions/1366068/whats-the-complete-range-for
   (save-excursion
     ;; FIXME: only Chinese (not CJK) string should be split,
     ;; but I do not know the exactly range of Chinese characters.
-    (when (chinese-word-cjk-string-p (thing-at-point 'word t))
-      (let* ((boundary (bounds-of-thing-at-point 'word))
-             (beginning-pos (car boundary))
-             (end-pos (cdr boundary))
-             (current-pos (point))
-             (index beginning-pos)
-             (old-index beginning-pos))
-        (dolist (word (split-string (chinese-word--split-by-space
-                                     (thing-at-point 'word t))))
-          (cl-incf index (length word))
-          (if (and (>= current-pos old-index)
-                   (< current-pos index))
-              (cl-return (cons old-index index))
-            (if (= index end-pos)       ; When point is just behind word
-                (cl-return (cons old-index index)))
-            (setq old-index index)))))))
+    (let ((current-word (thing-at-point 'word t)))
+      (when (and current-word (chinese-word-cjk-string-p current-word))
+        (let* ((boundary (bounds-of-thing-at-point 'word))
+               (beginning-pos (car boundary))
+               (end-pos (cdr boundary))
+               (current-pos (point))
+               (index beginning-pos)
+               (old-index beginning-pos))
+          (dolist (word (split-string (chinese-word--split-by-space
+                                       current-word)))
+            (cl-incf index (length word))
+            (if (and (>= current-pos old-index)
+                     (< current-pos index))
+                (cl-return (cons old-index index))
+              (if (= index end-pos)       ; When point is just behind word
+                  (cl-return (cons old-index index)))
+              (setq old-index index))))))))
 
 (put 'chinese-word 'bounds-of-thing-at-point 'chinese-word-at-point-bounds)
 
@@ -108,9 +109,10 @@ i.e. (thing-at-point 'word) can get proper word."
   (save-excursion
     ;; FIXME: only Chinese (not CJK) string should be split,
     ;; but I do not know the exactly range of Chinese characters.
-    (if (chinese-word-cjk-string-p (thing-at-point 'word t))
-        (chinese-word-at-point-bounds)
-      (bounds-of-thing-at-point 'word))))
+    (let ((current-word (thing-at-point 'word t)))
+      (if (and current-word (chinese-word-cjk-string-p current-word))
+          (chinese-word-at-point-bounds)
+        (bounds-of-thing-at-point 'word)))))
 
 (put 'chinese-or-other-word 'bounds-of-thing-at-point
      'chinese-or-other-word-at-point-bounds)
