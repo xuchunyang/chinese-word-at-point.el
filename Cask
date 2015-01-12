@@ -3,4 +3,5 @@
 
 (package-file "chinese-word-at-point.el")
 
-(development)
+(development
+ (depends-on "ert"))
