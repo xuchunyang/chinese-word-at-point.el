@@ -113,7 +113,7 @@ i.e. (thing-at-point 'word) can get proper word."
       (bounds-of-thing-at-point 'word))))
 
 (put 'chinese-or-other-word 'bounds-of-thing-at-point
-'chinese-or-other-word-at-point-bounds)
+     'chinese-or-other-word-at-point-bounds)
 
 ;;;###autoload
 (defun chinese-word-at-point ()
@@ -128,10 +128,10 @@ Here's \"other\" denotes any language words that Emacs can understand,
 i.e. (thing-at-point 'word) can get proper word."
   (thing-at-point 'chinese-or-other-word))
 
+(provide 'chinese-word-at-point)
+
 ;; Local Variables:
 ;; coding: utf-8
 ;; End:
-
-(provide 'chinese-word-at-point)
 
 ;;; chinese-word-at-point.el ends here
