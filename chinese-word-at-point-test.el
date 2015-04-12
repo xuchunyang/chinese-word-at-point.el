@@ -10,12 +10,12 @@
 (require 'ert)
 (require 'chinese-word-at-point)
 
-(ert-deftest chinese-word-cjk-string-p-test ()
+(ert-deftest chinese-word-chinese-string-p-test ()
   "Text CJK string predication."
-  (should (equal (chinese-word-cjk-string-p "中国人使用中文") t))
-  (should (equal (chinese-word-cjk-string-p "中国人使用中文a") nil))
-  (should (equal (chinese-word-cjk-string-p "English") nil))
-  (should (equal (chinese-word-cjk-string-p "1234") nil)))
+  (should (equal (chinese-word-chinese-string-p "中国人使用中文") t))
+  (should (equal (chinese-word-chinese-string-p "中国人使用中文a") nil))
+  (should (equal (chinese-word-chinese-string-p "English") nil))
+  (should (equal (chinese-word-chinese-string-p "1234") nil)))
 
 (ert-deftest chinese-word-at-point-test ()
   "Text (only) Chinese word at point."
