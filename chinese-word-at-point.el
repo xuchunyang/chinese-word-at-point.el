@@ -5,7 +5,7 @@
 ;; Author: Chunyang Xu <xuchunyang56@gmail.com>
 ;; URL: https://github.com/xuchunyang/chinese-word-at-point.el
 ;; Package-Requires: ((cl-lib "0.5"))
-;; Version: 0.2.1
+;; Version: 0.2.2
 ;; Created: 9 Jan 2015
 ;; Keywords: convenience, Chinese
 
@@ -36,8 +36,8 @@
 ;; You can also use (chinese-word-at-point) and (chinese-or-other-word-at-point)
 ;; if you prefer.
 ;;
-;; 3. use (chinese-word-cjk-string-p string) to test whether a string consists
-;; of pure CJK characters.
+;; 3. use (chinese-word-chinese-string-p string) to test whether a string consists
+;; of pure Chinese characters.
 
 ;;; Code:
 
@@ -62,14 +62,15 @@ Return Chinese words as a string separated by one space"
 
 (defun chinese-word-chinese-string-p (string)
   "Return t if STRING is a Chinese string."
-  (string-match (format "\\cC\\{%s\\}" (length string))
-                string))
+  (if (string-match (format "\\cC\\{%s\\}" (length string)) string)
+      t
+    nil))
+(define-obsolete-function-alias
+  'chinese-word-cjk-string-p 'chinese-word-chinese-string-p "0.2.2")
 
 (defun chinese-word-at-point-bounds ()
   "Return the bounds of the (most likely) Chinese word at point."
   (save-excursion
-    ;; FIXME: only Chinese (not CJK) string should be split,
-    ;; but I do not know the exactly range of Chinese characters.
     (let ((current-word (thing-at-point 'word t)))
       (when (and current-word (chinese-word-chinese-string-p current-word))
         (let* ((boundary (bounds-of-thing-at-point 'word))
@@ -96,10 +97,8 @@ Return Chinese words as a string separated by one space"
 Here's \"other\" means any language words that Emacs can understand,
 i.e. (thing-at-point 'word) can get proper word."
   (save-excursion
-    ;; FIXME: only Chinese (not CJK) string should be split,
-    ;; but I do not know the exactly range of Chinese characters.
     (let ((current-word (thing-at-point 'word t)))
-      (if (and current-word (chinese-word-cjk-string-p current-word))
+      (if (and current-word (chinese-word-chinese-string-p current-word))
           (chinese-word-at-point-bounds)
         (bounds-of-thing-at-point 'word)))))
 
