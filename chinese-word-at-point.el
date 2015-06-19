@@ -5,7 +5,7 @@
 ;; Author: Chunyang Xu <xuchunyang56@gmail.com>
 ;; URL: https://github.com/xuchunyang/chinese-word-at-point.el
 ;; Package-Requires: ((cl-lib "0.5"))
-;; Version: 0.2.2
+;; Version: 0.2.3
 ;; Created: 9 Jan 2015
 ;; Keywords: convenience, Chinese
 
@@ -71,7 +71,7 @@ Return Chinese words as a string separated by one space"
 (defun chinese-word-at-point-bounds ()
   "Return the bounds of the (most likely) Chinese word at point."
   (save-excursion
-    (let ((current-word (thing-at-point 'word t)))
+    (let ((current-word (thing-at-point 'word)))
       (when (and current-word (chinese-word-chinese-string-p current-word))
         (let* ((boundary (bounds-of-thing-at-point 'word))
                (beginning-pos (car boundary))
@@ -97,7 +97,7 @@ Return Chinese words as a string separated by one space"
 Here's \"other\" means any language words that Emacs can understand,
 i.e. (thing-at-point 'word) can get proper word."
   (save-excursion
-    (let ((current-word (thing-at-point 'word t)))
+    (let ((current-word (thing-at-point 'word)))
       (if (and current-word (chinese-word-chinese-string-p current-word))
           (chinese-word-at-point-bounds)
         (bounds-of-thing-at-point 'word)))))
