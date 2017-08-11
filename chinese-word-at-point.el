@@ -79,8 +79,8 @@ Return Chinese words as a string separated by one space"
                (current-pos (point))
                (index beginning-pos)
                (old-index beginning-pos))
-          (dolist (word (split-string (chinese-word--split-by-space
-                                       current-word)))
+          (cl-dolist (word (split-string (chinese-word--split-by-space
+                                          current-word)))
             (cl-incf index (length word))
             (if (and (>= current-pos old-index)
                      (< current-pos index))
